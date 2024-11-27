@@ -1,0 +1,51 @@
+<html>
+<body>
+
+<img id="w0" src="Gw0.jpg" width="100" height="100">
+<img id="w1" src="Gw1.jpg" width="100" height="100">
+<img id="w2" src="Gw2.jpg" width="100" height="100">
+<img id="w3" src="Gw3.jpg" width="100" height="100">
+<img id="w4" src="Gw4.jpg" width="100" height="100">
+<img id="w5" src="Gw5.jpg" width="100" height="100">
+<img id="w6" src="Gw6.jpg" width="100" height="100">
+<img id="w7" src="Gw7.jpg" width="100" height="100">
+<img id="w8" src="Gw8.jpg" width="100" height="100">
+<img id="w9" src="Gw9.jpg" width="100" height="100">
+<img id="w10" src="Gw10.jpg" width="100" height="100">
+<img id="w11" src="Gw11.jpg" width="100" height="100">
+<img id="w12" src="Gw12.jpg" width="100" height="100">
+<br>
+
+<script>
+let termStartingWeek = 46;
+let termBreakAfterWeek = 6;
+let ballColour = "R";
+
+let urlParams = new URLSearchParams(window.location.search);
+if(urlParams.get('termStartingWeek')){termStartingWeek = urlParams.get('termStartingWeek') };
+if(urlParams.get('termBreakAfterWeek')){termBreakAfterWeek = urlParams.get('termBreakAfterWeek') };
+if(urlParams.get('ballColour')){ballColour = urlParams.get('ballColour') };
+console.log(ballColour);
+Date.prototype.getweekinyear = function(){
+  var d = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
+  var dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
+};
+let weekinyear = new Date().getweekinyear();
+let weekInThisTerm = weekinyear - termStartingWeek;
+let termBreakAfterWeekoffset = weekInThisTerm > termBreakAfterWeek;
+let weekinterm = weekInThisTerm - termBreakAfterWeekoffset;
+let newImgPath = document.getElementById("w" + weekinterm ).src.replace(/\/Gw(\d+).jpg/g, "/" + ballColour + "w$1.jpg");
+document.getElementById("w" + weekinterm ).src = newImgPath;
+console.log('Weeks since start of year = ' + weekinyear );
+console.log('Term starts in week = ' + termStartingWeek );
+console.log('Weeks since start of term = ' + weekInThisTerm );
+console.log('Has term break happened yet = ' + termBreakAfterWeekoffset );
+console.log('The current week number is ' + weekinterm );
+</script>
+
+
+</body>
+</html>
