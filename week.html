@@ -14,6 +14,9 @@ let urlParams = new URLSearchParams(window.location.search);
 if(urlParams.get('termStartDate')){termStartDate = urlParams.get('termStartDate') };
 if(urlParams.get('beforeText')){beforeText = urlParams.get('beforeText') };
 if(urlParams.get('afterText')){afterText = urlParams.get('afterText') };
+if(urlParams.get('fontSize')){fontSize = urlParams.get('fontSize') };
+if(urlParams.get('fontColour')){fontColour = urlParams.get('fontColour') };
+if(urlParams.get('font')){font = urlParams.get('font') };
 
 function getWeekInYear(date) {
   let d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
