@@ -28,7 +28,7 @@ let weekInYear = getWeekInYear(new Date());
 let weekInThisTerm = weekInYear - termStartWeek + 1;
 let termBreakAfterWeekOffset = weekInThisTerm > termBreakAfterWeek;
 let weekInTerm = weekInThisTerm - termBreakAfterWeekOffset;
-let outputString = beforeText + "Week " + weekInTerm + afterText;
+let outputString = `${beforeText} Week ${weekInTerm} ${afterText}";
 
 if (weekInTerm < 1){outputString = "Before Semester Start"}
 if (weekInTerm == termNumberOfWeeks + 1){outputString = "STUVAC"}
