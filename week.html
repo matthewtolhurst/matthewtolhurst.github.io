@@ -1,0 +1,43 @@
+<html>
+<body>
+<script>
+let termBreakAfterWeek = 8;
+let termNumberOfWeeks = 13;
+let termStartDate = "2025-08-04";
+let fontColour = "e64626";
+let font = "Lato";
+let fontSize = "16pt";
+
+let urlParams = new URLSearchParams(window.location.search);
+if(urlParams.get('termStartDate')){termStartDate = urlParams.get('termStartDate') };
+
+function getWeekInYear(date) {
+  let d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  let dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  let yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+}
+
+let termStartWeek = getWeekInYear(new Date(termStartDate));
+let weekInYear = getWeekInYear(new Date());
+let weekInThisTerm = weekInYear - termStartWeek + 1;
+let termBreakAfterWeekOffset = weekInThisTerm > termBreakAfterWeek;
+let weekInTerm = weekInThisTerm - termBreakAfterWeekOffset;
+let outputString = "Week " + weekInTerm;
+
+if (weekInTerm < 1){outputString = "Before Semester Start"}
+if (weekInTerm == termNumberOfWeeks + 1){outputString = "STUVAC"}
+if (weekInTerm == termNumberOfWeeks + 2){outputString = "Week 1 Exam Period"}
+if (weekInTerm == termNumberOfWeeks + 3){outputString = "Week 2 Exam Period"}
+if (weekInTerm > termNumberOfWeeks + 3){outputString = "Semester End"}
+
+document.write(`<span style="color: ${fontColour} ;font-family: ${font};font-size: ${fontSize}">${outputString}</span>`);
+//console.log('Weeks since start of year = ' + weekInYear );
+//console.log('Term starts in week = ' + termStartWeek );
+//console.log('Weeks since start of term = ' + weekInThisTerm );
+//console.log('Has term break happened yet = ' + termBreakAfterWeekOffset );
+//console.log('The current week number is ' + weekInTerm );
+</script>
+</body>
+</html>
