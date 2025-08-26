@@ -7,9 +7,13 @@ let termStartDate = "2025-08-04";
 let fontColour = "e64626";
 let font = "Lato";
 let fontSize = "16pt";
+let beforeText = "";
+let afterText = "";
 
 let urlParams = new URLSearchParams(window.location.search);
 if(urlParams.get('termStartDate')){termStartDate = urlParams.get('termStartDate') };
+if(urlParams.get('beforeText')){termStartDate = urlParams.get('beforeText') };
+if(urlParams.get('afterText')){termStartDate = urlParams.get('afterText') };
 
 function getWeekInYear(date) {
   let d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
@@ -24,7 +28,7 @@ let weekInYear = getWeekInYear(new Date());
 let weekInThisTerm = weekInYear - termStartWeek + 1;
 let termBreakAfterWeekOffset = weekInThisTerm > termBreakAfterWeek;
 let weekInTerm = weekInThisTerm - termBreakAfterWeekOffset;
-let outputString = "Week " + weekInTerm;
+let outputString = beforeText + "Week " + weekInTerm + afterText;
 
 if (weekInTerm < 1){outputString = "Before Semester Start"}
 if (weekInTerm == termNumberOfWeeks + 1){outputString = "STUVAC"}
