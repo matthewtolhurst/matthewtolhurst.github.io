@@ -12,8 +12,8 @@ let afterText = "";
 
 let urlParams = new URLSearchParams(window.location.search);
 if(urlParams.get('termStartDate')){termStartDate = urlParams.get('termStartDate') };
-if(urlParams.get('beforeText')){termStartDate = urlParams.get('beforeText') };
-if(urlParams.get('afterText')){termStartDate = urlParams.get('afterText') };
+if(urlParams.get('beforeText')){beforeText = urlParams.get('beforeText') };
+if(urlParams.get('afterText')){afterText = urlParams.get('afterText') };
 
 function getWeekInYear(date) {
   let d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
@@ -23,16 +23,20 @@ function getWeekInYear(date) {
   return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
 
-let termStartWeek = getWeekInYear(new Date(termStartDate));
-let weekInYear = getWeekInYear(new Date());
+function getWeeksSinceEpoch(date, epoch = new Date("1970-01-01T00:00:00Z")) {
+  let d = date instanceof Date ? date : new Date(date);
+  let diffMs = d.getTime() - epoch.getTime();
+  return Math.floor(diffMs / (7 * 24 * 60 * 60 * 1000));
+}
+
+//let termStartWeek = getWeekInYear(new Date(termStartDate));
+let termStartWeek = getWeeksSinceEpoch(new Date(termStartDate));
+//let weekInYear = getWeekInYear(new Date());
+let weekInYear = getWeeksSinceEpoch(new Date());
 let weekInThisTerm = weekInYear - termStartWeek + 1;
 let termBreakAfterWeekOffset = weekInThisTerm > termBreakAfterWeek;
 let weekInTerm = weekInThisTerm - termBreakAfterWeekOffset;
 
-console.log("beforeText:", beforeText);
-console.log("weekInTerm:", weekInTerm, "type:", typeof weekInTerm);
-console.log("afterText:", afterText);
-  
 let outputString = `${beforeText} Week ${weekInTerm} ${afterText}`;
 
 if (weekInTerm < 1){outputString = "Before Semester Start"}
