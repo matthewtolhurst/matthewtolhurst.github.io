@@ -13,6 +13,8 @@ let afterText = "";
 
 let urlParams = new URLSearchParams(window.location.search);
 if(urlParams.get('termStartDate')){termStartDate = urlParams.get('termStartDate') };
+if(urlParams.get('termBreakAfterWeek')){termBreakAfterWeek = urlParams.get('termBreakAfterWeek') };
+if(urlParams.get('termNumberOfWeeks')){termNumberOfWeeks = urlParams.get('termNumberOfWeeks') };
 if(urlParams.get('beforeText')){beforeText = urlParams.get('beforeText') };
 if(urlParams.get('afterText')){afterText = urlParams.get('afterText') };
 if(urlParams.get('fontSize')){fontSize = urlParams.get('fontSize') };
