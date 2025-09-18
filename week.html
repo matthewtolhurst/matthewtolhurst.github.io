@@ -29,7 +29,7 @@ function getWeekInYear(date) {
   return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
 
-function getWeeksSinceEpoch(date, epoch = new Date("1970-01-01T00:00:00Z")) {
+function getWeeksSinceEpoch(date, epoch = new Date("1970-01-04T14:00:00Z")) {
   let d = date instanceof Date ? date : new Date(date);
   let diffMs = d.getTime() - epoch.getTime();
   return Math.floor(diffMs / (7 * 24 * 60 * 60 * 1000));
@@ -60,7 +60,7 @@ outputElement.style.fontSize = fontSize;
 outputElement.style.fontFamily = font;
 outputElement.style.color = fontColour;
   
-//console.log('Weeks since start of year = ' + weekInYear );
+//console.log('Weeks since epoch = ' + weekInYear );
 //console.log('Term starts in week = ' + termStartWeek );
 //console.log('Weeks since start of term = ' + weekInThisTerm );
 //console.log('Has term break happened yet = ' + termBreakAfterWeekOffset );
