@@ -45,12 +45,12 @@ let weekInTerm = weekInThisTerm - termBreakAfterWeekOffset;
 
 let outputString = `${beforeText} Week ${weekInTerm} ${afterText}`;
 
-if (weekInTerm < 1){outputString = `${beforeText} Before Semester Start ${afterText}`}
-if (weekInThisTerm == termBreakAfterWeek + 1){outputString = `${beforeText} Semester Recess ${afterText}`}
+if (weekInTerm < 1){outputString = `${beforeText} Before Start ${afterText}`}
+if (weekInThisTerm == termBreakAfterWeek + 1){outputString = `${beforeText} Recess ${afterText}`}
 if (weekInTerm == termNumberOfWeeks + 1){outputString = `${beforeText} STUVAC ${afterText}`}
 if (weekInTerm == termNumberOfWeeks + 2){outputString = `${beforeText} Week 1 Exam Period ${afterText}`}
 if (weekInTerm == termNumberOfWeeks + 3){outputString = `${beforeText} Week 2 Exam Period ${afterText}`}
-if (weekInTerm > termNumberOfWeeks + 3){outputString = `${beforeText} Semester End ${afterText}`}
+if (weekInTerm > termNumberOfWeeks + 3){outputString = `${beforeText} End ${afterText}`}
 
 //document.write(`<span style="color: ${fontColour} ;font-family: ${font};font-size: ${fontSize}">${outputString}</span>`);
 const outputElement = document.getElementById('weekspan');
