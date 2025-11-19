@@ -45,7 +45,7 @@ let weekInTerm = weekInThisTerm - termBreakAfterWeekOffset;
 
 let outputString = `${beforeText} Week ${weekInTerm} ${afterText}`;
 
-if (weekInTerm < 1){outputString = `${beforeText} Before Start ${afterText}`}
+if (weekInTerm < 1){outputString = `${beforeText} Before Start of Semester`}
 if (weekInThisTerm == termBreakAfterWeek + 1){outputString = `${beforeText} Break Week ${afterText}`}
 if (weekInTerm == termNumberOfWeeks + 1){outputString = `${beforeText} STUVAC ${afterText}`}
 if (weekInTerm == termNumberOfWeeks + 2){outputString = `${beforeText} Week 1 Exam Period ${afterText}`}
