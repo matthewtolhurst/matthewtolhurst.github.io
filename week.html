@@ -50,7 +50,7 @@ if (weekInThisTerm == termBreakAfterWeek + 1){outputString = `${beforeText} Brea
 if (weekInTerm == termNumberOfWeeks + 1){outputString = `${beforeText} STUVAC ${afterText}`}
 if (weekInTerm == termNumberOfWeeks + 2){outputString = `${beforeText} Week 1 Exam Period ${afterText}`}
 if (weekInTerm == termNumberOfWeeks + 3){outputString = `${beforeText} Week 2 Exam Period ${afterText}`}
-if (weekInTerm > termNumberOfWeeks + 3){outputString = `${beforeText} End ${afterText}`}
+if (weekInTerm > termNumberOfWeeks + 3){outputString = `${beforeText} End of Semester`}
 
 //document.write(`<span style="color: ${fontColour} ;font-family: ${font};font-size: ${fontSize}">${outputString}</span>`);
 const outputElement = document.getElementById('weekspan');
