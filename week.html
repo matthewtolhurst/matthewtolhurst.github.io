@@ -4,7 +4,9 @@
 <script>
 let termBreakAfterWeek = 8;
 let termNumberOfWeeks = 13;
-let termStartDate = "2025-08-04";
+//let termStartDate = "2025-08-04";
+let term1StartWeek = 8;
+let term2StartWeek = 31;
 let fontColour = "e64626";
 let font = "Lato, sans-serif";
 let fontSize = "18pt";
@@ -12,7 +14,7 @@ let beforeText = "";
 let afterText = "";
 
 let urlParams = new URLSearchParams(window.location.search);
-if(urlParams.get('termStartDate')){termStartDate = urlParams.get('termStartDate') };
+//if(urlParams.get('termStartDate')){termStartDate = urlParams.get('termStartDate') };
 if(urlParams.get('termBreakAfterWeek')){termBreakAfterWeek = urlParams.get('termBreakAfterWeek') };
 if(urlParams.get('termNumberOfWeeks')){termNumberOfWeeks = urlParams.get('termNumberOfWeeks') };
 if(urlParams.get('beforeText')){beforeText = urlParams.get('beforeText') };
@@ -22,11 +24,12 @@ if(urlParams.get('fontColour')){fontColour = urlParams.get('fontColour') };
 if(urlParams.get('font')){font = urlParams.get('font') };
 
 function getWeekInYear(date) {
-  let d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  let dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  let yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+  const now = new Date();
+  const epoch = new Date(now.getFullYear(), 0, 1);
+  epoch.setDate(epoch.getDate() - ((7 - epoch.getDay()) % 7));
+  let d = date instanceof Date ? date : new Date(date);
+  let diffMs = d.getTime() - epoch.getTime();
+  return Math.floor(diffMs / (7 * 24 * 60 * 60 * 1000));
 }
 
 function getWeeksSinceEpoch(date, epoch = new Date("1970-01-04T14:00:00Z")) {
@@ -35,10 +38,15 @@ function getWeeksSinceEpoch(date, epoch = new Date("1970-01-04T14:00:00Z")) {
   return Math.floor(diffMs / (7 * 24 * 60 * 60 * 1000));
 }
 
-//let termStartWeek = getWeekInYear(new Date(termStartDate));
-let termStartWeek = getWeeksSinceEpoch(new Date(termStartDate));
-//let weekInYear = getWeekInYear(new Date());
-let weekInYear = getWeeksSinceEpoch(new Date());
+//let termStartWeek = getWeeksSinceEpoch(new Date(termStartDate));
+//let weekInYear = getWeeksSinceEpoch(new Date());
+let weekInYear = getWeekInYear(new Date());
+let termStartWeek = term1StartWeek;
+let termNumber = 1;
+if (weekInYear >= 26){
+  termStartWeek = term2StartWeek
+  termNumber = 2
+};
 let weekInThisTerm = weekInYear - termStartWeek + 1;
 let termBreakAfterWeekOffset = weekInThisTerm > termBreakAfterWeek;
 let weekInTerm = weekInThisTerm - termBreakAfterWeekOffset;
